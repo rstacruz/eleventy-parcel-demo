@@ -1,10 +1,13 @@
 ---
+title: Home
 permalink: index.html
-layout: layouts/home.njk
+layout: layouts/base.njk
 ---
 
-hello :)
+This is the home page.
 
-  {%- for entry in collections.all %}
-    <li class="nav-item{% if entry.url == page.url %} nav-item-active{% endif %}"><a href="{{ entry.url | url }}">{{ entry.url }}</a></li>
-  {%- endfor %}
+<h3>Pages</h3>
+
+{%- for entry in collections.all %}
+  <li><a href="{{ entry.url | url }}">{{ entry.url }}</a></li>
+{%- endfor %}

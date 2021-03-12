@@ -1,29 +1,32 @@
 {
   "name": "11ty",
   "version": "1.0.0",
-  "license": "MIT",
-  "dependencies": {
-    "@11ty/eleventy": "^0.11.1",
-    "npm-run-all": "^4.1.5",
-    "parcel": "^2.0.0-beta.1",
-    "sass": "^1.32.8"
-  },
   "config": {
     "input": "src/",
     "intermediate": "tmp/",
     "output": "dist/"
   },
-  "scripts": {
-    "clean": "rm -rf tmp/ $npm_package_config_output $npm_package_config_intermediate",
-    "11ty:watch": "eleventy --input=$npm_package_config_input --output=$npm_package_config_intermediate --watch",
-    "11ty:build": "eleventy --input=$npm_package_config_input --output=$npm_package_config_intermediate",
-    "parcel:serve": "parcel serve \"./$npm_package_config_intermediate**/*.html\"",
-    "parcel:build": "parcel build \"./$npm_package_config_intermediate**/*.html\" --dist-dir $npm_package_config_output",
-    "predev": "run-s clean",
-    "dev": "run-p -sl 11ty:watch parcel:serve",
-    "build": "run-s -sl clean 11ty:build parcel:build"
+  "dependencies": {
+    "@11ty/eleventy": "^0.11.1",
+    "npm-run-all": "^4.1.5",
+    "parcel": "^2.0.0-beta.1",
+    "rimraf": "^3.0.2",
+    "sass": "^1.32.8"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "2.0.0-nightly.625"
+    "@parcel/transformer-sass": "2.0.0-nightly.625",
+    "sirv-cli": "^1.0.11"
+  },
+  "license": "MIT",
+  "scripts": {
+    "11ty:build": "eleventy --input=$npm_package_config_input --output=$npm_package_config_intermediate",
+    "11ty:watch": "eleventy --input=$npm_package_config_input --output=$npm_package_config_intermediate --watch",
+    "build": "run-s -l clean 11ty:build parcel:build",
+    "clean": "rimraf $npm_package_config_output $npm_package_config_intermediate; mkdir -p $npm_package_config_output $npm_package_config_intermediate",
+    "dev": "run-p -l 11ty:watch parcel:watch serve",
+    "parcel:build": "parcel build \"./$npm_package_config_intermediate**/*.html\" --dist-dir $npm_package_config_output --no-cache",
+    "parcel:watch": "parcel watch \"./$npm_package_config_intermediate**/*.html\" --dist-dir $npm_package_config_output --no-cache",
+    "serve": "sirv dist --dev",
+    "predev": "run-s clean"
   }
 }
