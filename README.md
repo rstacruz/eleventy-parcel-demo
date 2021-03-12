@@ -7,7 +7,7 @@ A short barebones demo showing how Parcel can be integrated with Eleventy (11ty)
 </p>
 
 <p align='center'>
-<img src='https://user-images.githubusercontent.com/74385/110925544-714ab380-8377-11eb-964f-ef0a6dc55c16.png' width='600'>
+<img src='https://user-images.githubusercontent.com/74385/110929799-7827f500-837c-11eb-84d3-c4615f9b70e8.gif' width='500' alt='Screencast of a Parcel and Eleventy server running in a terminal'>
 </p>
 
 ## How it works
@@ -20,12 +20,28 @@ yarn build  # builds to dist/
 
 - [Eleventy] builds `src/` to `tmp/`.
 - [Parcel] builds `tmp/` to `dist/`.
-- Links to source files (eg, `<script src="~/styles/main.scss">`) are processed by Parcel.
+- Links to source files (eg, `<script src="~/styles/main.js">`) are processed by Parcel.
+- Files in `scripts/` and `styles/` are untouched by Eleventy.
 
 [eleventy]: https://www.11ty.dev/
 [parcel]: https://parceljs.org/
 
 ## FAQ
+
+### Why use Parcel with Eleventy?
+
+- Parcel has features that are outside the scope of Eleventy: bundling(!), [hot module reloading][hmr], [code splitting][code-splitting], and many more.
+- Parcel has fantastic support for modern tech like [React][parcel-react], [Vue][parcel-vue], [Elm][parcel-elm] and more.
+
+[code-splitting]: https://v2.parceljs.org/features/code-splitting
+[hmr]: https://v2.parceljs.org/features/hmr/
+[parcel-react]: https://v2.parceljs.org/recipes/react/
+[parcel-vue]: https://v2.parceljs.org/languages/vue/
+[parcel-elm]: https://v2.parceljs.org/languages/elm/
+
+### Is this a great way to implement React with Eleventy?
+
+Yes, absolutely!
 
 ### Why is there [sirv]?
 
